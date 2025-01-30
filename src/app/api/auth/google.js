@@ -21,6 +21,7 @@ export default async function handler(req, res) {
     // TODO: Save user to database if not exists
     res.status(200).json({ id: sub, name, email, picture });
   } catch (error) {
+    console.log(error)
     res.status(401).json({ error: "Invalid token" });
   }
 }
