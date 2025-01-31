@@ -15,6 +15,7 @@ export default async function handler(req, res) {
       audience: process.env.GOOGLE_CLIENT_ID,
     });
 
+    console.log(ticket)
     const payload = ticket.getPayload(); // Extract user info
     const { sub, name, email, picture } = payload;
 

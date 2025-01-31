@@ -1,7 +1,8 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { signIn } from "next-auth/react";
 
-export default NextAuth({
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -21,5 +22,11 @@ export default NextAuth({
       session.accessToken = token.accessToken; // Attach token to session
       return session;
     },
+    async signIn({account, profile}) {
+      console.log(profile)
+    }
   },
-});
+};
+
+const handler = NextAuth(authOptions)
+export { handler as GET, handler as POST }
