@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { signIn } from "next-auth/react";
 
 const authOptions = {
   providers: [
@@ -13,6 +12,7 @@ const authOptions = {
   callbacks: {
     async jwt({ token, account, user }) {
       if (account) {
+        console.log(user)
         token.accessToken = account.access_token; // Store access token
         token.id = user.id;
       }
@@ -22,9 +22,6 @@ const authOptions = {
       session.accessToken = token.accessToken; // Attach token to session
       return session;
     },
-    async signIn({account, profile}) {
-      console.log(profile)
-    }
   },
 };
 
